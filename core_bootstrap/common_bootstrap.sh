@@ -36,3 +36,6 @@ cat > /home/$USER/.ssh/config <<DELIM
 Host github.com
 StrictHostKeyChecking no
 DELIM
+
+
+mkdir ~/repos
