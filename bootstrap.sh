@@ -14,16 +14,19 @@ echo "################################"
 echo "################################"
 echo "##Installing cloudlet framework components##"
 echo "################################"
+cd $SCRIPT_ROOT_DIR
 . core_bootstrap/cloudlet_framework_bootstrap.sh
 
 
 echo "################################"
 echo "##Installing api framework components##"
 echo "################################"
+cd $SCRIPT_ROOT_DIR
 . core_bootstrap/api_framework_bootstrap.sh
 
 
 echo "################################"
 echo "##Installing security framework components##"
 echo "################################"
+cd $SCRIPT_ROOT_DIR
 . core_bootstrap/security_framework_bootstrap.sh
