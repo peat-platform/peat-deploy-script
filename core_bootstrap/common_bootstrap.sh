@@ -39,3 +39,5 @@ DELIM
 
 
 mkdir ~/repos
+
+chown -R $USER:$GROUP ~/repos/
