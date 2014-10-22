@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+cd $SCRIPT_ROOT_DIR
+
 # Install requirements for Android sdk generation
 sudo apt-get install -y openjdk-7-jdk
 sudo apt-get install -y maven=3.0.4-2

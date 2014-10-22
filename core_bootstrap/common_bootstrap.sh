@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+cd $SCRIPT_ROOT_DIR
+
 apt-get update -q
 
 sudo apt-get install -y software-properties-common

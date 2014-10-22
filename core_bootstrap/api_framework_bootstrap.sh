@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+cd $SCRIPT_ROOT_DIR
+
 sudo apt-get install -y python-software-properties
 sudo add-apt-repository -y ppa:fkrull/deadsnakes
 sudo apt-get update  -y

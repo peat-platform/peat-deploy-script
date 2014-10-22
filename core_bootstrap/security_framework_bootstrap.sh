@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+cd $SCRIPT_ROOT_DIR
+
 # Install Security req. (tomcat, posgres)
 sudo apt-get install -y openjdk-7-jre-headless
 sudo apt-get install -y tomcat7

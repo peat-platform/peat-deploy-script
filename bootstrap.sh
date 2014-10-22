@@ -2,6 +2,7 @@
 USER=ubuntu
 GROUP=ubuntu
 
+SCRIPT_ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 #!/bin/bash
 echo "################################"
