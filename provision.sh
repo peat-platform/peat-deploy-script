@@ -1,5 +1,7 @@
 #!/bin/bash
 
+SCRIPT_ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 cd $SCRIPT_ROOT_DIR
 . core_provision/cloudlet_framework_provision.sh
 cd $SCRIPT_ROOT_DIR
