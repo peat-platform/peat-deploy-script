@@ -33,5 +33,3 @@ Navigate to `https://<your ip address>`.
 ### Troubleshooting
 
 If you have difficulty running the node applications try deleting their node_modules folder and executing npm install again.
-
-Note: If using Windows, any paths must use double slashes i.e. `"C:\Users\user1\docs" -> "C:\\Users\\user1\\docs"`
