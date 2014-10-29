@@ -24,6 +24,8 @@ Once you are happy with your parameters you execute the following commands to bo
 
     sh utils/tmux_openi.sh
 
+    sh utils/populate_default_types.sh
+
     sh utils/generate_api_clients.sh dev.openi-ict.eu
 
 Navigate to `https://<your ip address>`.
