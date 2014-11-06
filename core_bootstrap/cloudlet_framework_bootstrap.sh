@@ -92,6 +92,7 @@ tar zxvf kibana-3.1.1.tar.gz
 
 # usermod -a -G $USER $GROUP
 sudo mkdir -p /opt/openi/cloudlet_platform/logs/
+ln -s /home/$USER/repos/mongrel2/uploads/ /opt/openi/cloudlet_platform/
 
 sudo chown -R $USER:$GROUP /opt/openi/cloudlet_platform/
 
