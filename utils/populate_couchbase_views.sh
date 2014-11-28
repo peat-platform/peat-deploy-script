@@ -61,4 +61,4 @@ curl --cacert $SSL_CERT -X PUT \
         }
       }
     }' \
-  http://admin:password@localhost:8092/openi/_design/subscription_views
+  http://admin:password@localhost:8092/objects/_design/subscription_views

@@ -15,7 +15,7 @@ curl --insecure -X POST \
   ],
   "@reference": "https://openi-ict.eu/images"
 }' \
-  https://dev.openi-ict.eu:443/api/v1/types
+  https://localhost:443/api/v1/types
 
 
 curl --insecure -X POST \
@@ -33,7 +33,7 @@ curl --insecure -X POST \
   ],
   "@reference": "https://openi-ict.eu/videos"
 }' \
-  https://dev.openi-ict.eu:443/api/v1/types
+  https://localhost:443/api/v1/types
 
 
 curl --insecure -X POST \
@@ -51,7 +51,7 @@ curl --insecure -X POST \
   ],
   "@reference": "https://openi-ict.eu/pdfs"
 }' \
-  https://dev.openi-ict.eu:443/api/v1/types
+  https://localhost:443/api/v1/types
 
 
 
@@ -70,4 +70,4 @@ curl --insecure -X POST \
   ],
   "@reference": "https://openi-ict.eu/audio"
 }' \
-  https://dev.openi-ict.eu:443/api/v1/types
+  https://localhost:443/api/v1/types
