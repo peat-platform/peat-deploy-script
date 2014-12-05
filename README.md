@@ -26,7 +26,9 @@ Once you are happy with your parameters you execute the following commands to bo
 
     sh utils/populate_default_types.sh
 
-    sh utils/generate_api_clients.sh dev.openi-ict.eu
+    sh /vagrant/utils/populate_couchbase_views.sh
+
+    sh utils/generate_api_clients.sh server_dns
 
 Navigate to `https://<your ip address>`.
 
