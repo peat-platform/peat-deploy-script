@@ -105,7 +105,7 @@ echo manual | sudo tee /etc/init/logstash-web.override
 # usermod -a -G vagrant vagrant
 sudo mkdir -p /opt/openi/cloudlet_platform/logs/
 sudo mkdir -p /opt/openi/cloudlet_platform/uploads/
-sudo chown -R vagrant:vagrant /opt/openi/cloudlet_platform/
+sudo chown -R $USER:$USER /opt/openi/cloudlet_platform/
 
 
 #sudo service elasticsearch start
