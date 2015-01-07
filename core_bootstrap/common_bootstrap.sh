@@ -38,6 +38,6 @@ StrictHostKeyChecking no
 DELIM
 
 
-mkdir ~/repos
+mkdir /home/$USER/repos
 
-chown -R $USER:$GROUP ~/repos/
+chown -R $USER:$GROUP /home/$USER/repos/
