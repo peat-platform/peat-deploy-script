@@ -17,7 +17,7 @@ rm scala-2.10.3.deb
 wget --quiet http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt//0.12.3/sbt.deb
 sudo dpkg -i sbt.deb
 sudo apt-get update
-sudo apt-get install sbt
+sudo apt-get install -y sbt
 rm sbt.deb
 
 
@@ -53,7 +53,6 @@ sudo /opt/couchbase/bin/couchbase-cli bucket-create -c 127.0.0.1:8091 --bucket=a
 sudo /opt/couchbase/bin/couchbase-cli bucket-create -c 127.0.0.1:8091 --bucket=permissions --bucket-type=couchbase --bucket-ramsize=100 --bucket-replica=0 -u admin -p password
 
 
-
 # Install Elasticsearch
 wget --quiet https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.3.0.deb
 sudo dpkg -i elasticsearch-1.3.0.deb
@@ -84,19 +83,30 @@ curl --retry 10 -XPUT http://localhost:9200/objects/ -d '{"index":{"analysis":{"
 curl -v -u admin:password http://localhost:8091/pools/default/remoteClusters -d name=elasticsearch -d hostname=localhost:9091 -d username=admin -d password=password
 curl -v -X POST -u admin:password http://localhost:8091/controller/createReplication -d fromBucket=objects -d toCluster=elasticsearch -d toBucket=objects -d replicationType=continuous -d type=capi
 
+sudo update-rc.d elasticsearch defaults 95 10
+sudo service elasticsearch start
+
 # Install Logstash
-cd /tmp ;
-wget --quiet https://download.elasticsearch.org/logstash/logstash/logstash-1.4.2.tar.gz;
-tar zxvf logstash-1.4.2.tar.gz
+#cd /tmp ;
+#wget --quiet https://download.elasticsearch.org/logstash/logstash/logstash-1.4.2.tar.gz;
+#tar zxvf logstash-1.4.2.tar.gz
+sudo wget --quiet -O - http://packages.elasticsearch.org/GPG-KEY-elasticsearch | sudo apt-key add -
+sudo echo "deb http://packages.elasticsearch.org/logstash/1.4/debian stable main" >> /etc/apt/sources.list
+sudo apt-get update
+sudo apt-get install logstash
+cd /etc/logstash/conf.d && wget --quiet https://gist.githubusercontent.com/philipobrien/c030717feeab0a74b1db/raw/cf859ec4063048868c9384e7cc23ee0d10a4994b/logstash-cloudlet.conf
+sudo service logstash restart
 
-wget --quiet https://download.elasticsearch.org/kibana/kibana/kibana-3.1.1.tar.gz;
-tar zxvf kibana-3.1.1.tar.gz
+sudo service logstash-web stop
+sudo update-rc.d logstash-web disable
+echo manual | sudo tee /etc/init/logstash-web.override
 
-# usermod -a -G $USER $GROUP
+
+# usermod -a -G vagrant vagrant
 sudo mkdir -p /opt/openi/cloudlet_platform/logs/
-ln -s /home/$USER/repos/mongrel2/uploads/ /opt/openi/cloudlet_platform/
-
+sudo mkdir -p /opt/openi/cloudlet_platform/uploads/
 sudo chown -R $USER:$GROUP /opt/openi/cloudlet_platform/
 
-sudo service elasticsearch start
+
+#sudo service elasticsearch start
 sudo sh /etc/init.d/networking restart
