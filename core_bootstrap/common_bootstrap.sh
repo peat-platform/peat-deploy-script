@@ -42,3 +42,17 @@ DELIM
 mkdir /home/$USER/repos
 
 chown -R $USER:$GROUP /home/$USER/repos/
+
+
+sudo apt-get install ufw
+sudo ufw disable
+sudo ufw default deny incoming
+sudo ufw default deny outgoing
+sudo ufw allow 22/tcp
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow out to any port 53
+sudo ufw allow out to any port 80
+sudo ufw allow out to any port 443
+sudo ufw allow out to any port 9418
+sudo ufw enable
