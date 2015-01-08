@@ -64,9 +64,10 @@ sudo ufw allow out to any port 443
 sudo ufw allow out to any port 9418
 sudo ufw enable
 
+echo y | ufw enable
 
 apt-get install -y fail2ban
 
-apt-get install logwatch
+sudo apt-get install -y logwatch
 
  sudo sed -i -e 's/\/usr\/sbin\/logwatch --output mail/\/usr\/sbin\/logwatch --output mail --mailto $LOGWATCH_EMAIL --detail/g' /etc/cron.daily/00logwatch
