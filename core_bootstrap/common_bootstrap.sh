@@ -71,3 +71,6 @@ apt-get install -y fail2ban
 sudo apt-get install -y logwatch
 
  sudo sed -i -e 's/\/usr\/sbin\/logwatch --output mail/\/usr\/sbin\/logwatch --output mail --mailto $LOGWATCH_EMAIL --detail/g' /etc/cron.daily/00logwatch
+
+
+source ~/.bashrc
