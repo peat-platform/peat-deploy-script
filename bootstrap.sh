@@ -1,6 +1,8 @@
 #!/bin/bash
 USER=ubuntu
 GROUP=ubuntu
+PASS=please_change_me
+LOGWATCH_EMAIL=deploy@localhost
 
 SCRIPT_ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 

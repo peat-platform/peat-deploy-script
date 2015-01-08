@@ -2,6 +2,11 @@
 
 cd $SCRIPT_ROOT_DIR
 
+echo "ubuntu:$PASS" | chpasswd
+
+sudo sed -i -e 's/ubuntu ALL=(ALL) NOPASSWD:ALL/ubuntu ALL=(ALL:ALL) ALL/g' /etc/sudoers.d/90-cloud-init-users
+
+
 apt-get update -q
 
 sudo apt-get install -y software-properties-common
@@ -43,6 +48,7 @@ mkdir /home/$USER/repos
 
 chown -R $USER:$GROUP /home/$USER/repos/
 
+ssh-keygen -A
 
 sudo apt-get install ufw
 sudo ufw disable
@@ -51,8 +57,16 @@ sudo ufw default deny outgoing
 sudo ufw allow 22/tcp
 sudo ufw allow 80/tcp
 sudo ufw allow 443/tcp
+ufw allow out to any port 25
 sudo ufw allow out to any port 53
 sudo ufw allow out to any port 80
 sudo ufw allow out to any port 443
 sudo ufw allow out to any port 9418
 sudo ufw enable
+
+
+apt-get install -y fail2ban
+
+apt-get install logwatch
+
+ sudo sed -i -e 's/\/usr\/sbin\/logwatch --output mail/\/usr\/sbin\/logwatch --output mail --mailto $LOGWATCH_EMAIL --detail/g' /etc/cron.daily/00logwatch
