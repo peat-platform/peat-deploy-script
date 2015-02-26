@@ -72,5 +72,6 @@ sudo apt-get install -y logwatch
 
  sudo sed -i -e 's/\/usr\/sbin\/logwatch --output mail/\/usr\/sbin\/logwatch --output mail --mailto $LOGWATCH_EMAIL --detail high/g' /etc/cron.daily/00logwatch
 
+/usr/sbin/logwatch --output mail --mailto dmccarthy@tssg.org --detail high
 
 source ~/.bashrc
