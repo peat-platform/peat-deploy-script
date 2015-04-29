@@ -1,8 +1,7 @@
 #!/bin/bash
 
-SSL_CERT=~/repos/mongrel2/certs/5dc1fbe7-d9db-4602-8d19-80c7ef2b1b11.crt
 
-curl --cacert $SSL_CERT -X PUT \
+curl  -X PUT \
   -H "Accept:application/json" \
   -H "Content-Type: application/json" \
   -d '{
@@ -27,7 +26,7 @@ curl --cacert $SSL_CERT -X PUT \
   http://admin:password@localhost:8092/objects/_design/objects_views
 
 
-curl --cacert $SSL_CERT -X PUT \
+curl -X PUT \
   -H "Accept:application/json" \
   -H "Content-Type: application/json" \
   -d '{
@@ -40,7 +39,7 @@ curl --cacert $SSL_CERT -X PUT \
    }' \
   http://admin:password@localhost:8092/objects/_design/cloudlets_views
 
-curl --cacert $SSL_CERT -X PUT \
+curl  -X PUT \
   -H "Accept:application/json" \
   -H "Content-Type: application/json" \
   -d '{
@@ -57,7 +56,7 @@ curl --cacert $SSL_CERT -X PUT \
   http://admin:password@localhost:8092/types/_design/type_views
 
 
-  curl --cacert $SSL_CERT -X PUT \
+  curl  -X PUT \
   -H "Accept:application/json" \
   -H "Content-Type: application/json" \
   -d '{
@@ -70,7 +69,7 @@ curl --cacert $SSL_CERT -X PUT \
   http://admin:password@localhost:8092/objects/_design/subscription_views
 
 
-curl --cacert $SSL_CERT -X PUT \
+curl -X PUT \
   -H "Accept:application/json" \
   -H "Content-Type: application/json" \
   -d '{
@@ -83,7 +82,7 @@ curl --cacert $SSL_CERT -X PUT \
    }' \
   http://admin:password@localhost:8092/clients/_design/clients_views
 
-  curl --cacert $SSL_CERT -X PUT \
+  curl -X PUT \
   -H "Accept:application/json" \
   -H "Content-Type: application/json" \
   -d '{
@@ -96,7 +95,7 @@ curl --cacert $SSL_CERT -X PUT \
   http://admin:password@localhost:8092/app_permissions/_design/permission_views
 
 
-    curl  --cacert $SSL_CERT  -X PUT \
+    curl  -X PUT \
     -H "Accept:application/json" \
     -H "Content-Type: application/json" \
     -d '{
@@ -109,7 +108,7 @@ curl --cacert $SSL_CERT -X PUT \
      }' \
     http://admin:password@localhost:8092/app_permissions/_design/permission_views
 
-  curl --cacert $SSL_CERT -X PUT \
+  curl -X PUT \
     -H "Accept:application/json" \
     -H "Content-Type: application/json" \
     -d '{
