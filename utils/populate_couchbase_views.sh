@@ -7,19 +7,19 @@ curl  -X PUT \
   -d '{
       "views": {
          "object_by_cloudlet_id": {
-            "map": "function (doc, meta) {\n   \n  emit( [doc[\"@cloudlet\"], doc[\"@cloudlet\"]], doc[\"@id\"] );\n  \n  for ( i in doc._permissions){\n    \n    if ( doc._permissions[i][\"read\"] ){\n  \temit( [i, doc[\"@cloudlet\"]], doc[\"@id\"] );\n    }\n  }\n}",
-             "reduce":"_count"
+            "map": "function (doc, meta) {\n\n  if (undefined === doc[\"@openi_type\"]){    return   }\n\n  var ts = new Date(doc[\"_date_modified\"]).getTime()\n\n  emit( [doc[\"@cloudlet\"], doc[\"@cloudlet\"], ts], doc[\"@id\"] );\n\n  for ( i in doc._permissions){\n\n    if ( doc._permissions[i][\"read\"] ){\n  	emit( [i, doc[\"@cloudlet\"], ts], doc[\"@id\"] );\n    }\n  }\n}",
+            "reduce":"_count"
          },
          "object_by_type" : {
-            "map" : "function (doc, meta) {\n   \n  emit( [doc[\"@cloudlet\"], doc[\"@openi_type\"], doc[\"@cloudlet\"]], [doc[\"@cloudlet\"], doc[\"@id\"]] );\n  \n  for ( i in doc._permissions){\n    \n    if ( doc._permissions[i][\"read\"] ){\n  \temit( [i, doc[\"@openi_type\"], doc[\"@cloudlet\"]], [doc[\"@cloudlet\"], doc[\"@id\"]] );\n    }\n    \n  }\n}",
+            "map" : "function (doc, meta) {\n if (undefined === doc[\"@openi_type\"]){\n return \n }\n var ts = new Date(doc[\"_date_modified\"]).getTime() \n emit( [doc[\"@cloudlet\"], doc[\"@openi_type\"], ts, doc[\"@cloudlet\"]], [doc[\"@cloudlet\"], doc[\"@id\"]] ); \n for ( i in doc._permissions){ \n if ( doc._permissions[i][\"read\"] ){ \n emit( [i, doc[\"@openi_type\"], ts, doc[\"@cloudlet\"]], [doc[\"@cloudlet\"], doc[\"@id\"]] );\n }\n}\n}",
             "reduce" : "_count"
          },
          "type_usage" : {
-            "map" : "function (doc, meta) {\n  emit(doc[\"@openi_type\"], 1);\n}",
+            "map" : "function (doc, meta) {\n if (undefined === doc[\"@openi_type\"]){\n    return \n  }\n emit(doc[\"@openi_type\"], 1);\n}",
             "reduce" : "_count"
          },
          "object_data" : {
-            "map" : "function (doc, meta) {\n emit(doc[\"@id\"], doc[\"@openi_type\"]);\n}"
+            "map" : "function (doc, meta) {\n if (undefined === doc[\"@openi_type\"]){\n    return \n  }\n emit(doc[\"@id\"], doc[\"@openi_type\"]);\n}"
          }
       }
    }' \
