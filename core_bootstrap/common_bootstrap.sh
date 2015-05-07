@@ -7,7 +7,7 @@ echo "ubuntu:$PASS" | chpasswd
 sudo sed -i -e 's/ubuntu ALL=(ALL) NOPASSWD:ALL/ubuntu ALL=(ALL:ALL) ALL/g' /etc/sudoers.d/90-cloud-init-users
 
 
-apt-get update -q
+apt-get update -q -y
 
 sudo apt-get install -y software-properties-common
 
@@ -50,7 +50,7 @@ chown -R $USER:$GROUP /home/$USER/repos/
 
 ssh-keygen -A
 
-sudo apt-get install ufw
+sudo apt-get install ufw -y
 sudo ufw disable
 sudo ufw default deny incoming
 sudo ufw default deny outgoing

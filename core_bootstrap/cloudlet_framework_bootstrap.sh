@@ -112,7 +112,7 @@ sudo wget https://debian.piwik.org/repository.gpg -qO piwik-repository.gpg
 sudo cat piwik-repository.gpg | sudo apt-key add -
 sudo rm -rf piwik-repository.gpg
 sudo sh -c 'echo "deb http://debian.piwik.org/ piwik main\ndeb-src http://debian.piwik.org/ piwik main" >> /etc/apt/sources.list.d/piwik.list'
-sudo apt-get update
+sudo apt-get update -y
 sudo apt-get install piwik -y
 cd /usr/share/piwik/plugins
 sudo git clone https://github.com/OPENi-ict/openi-app-tracker.git OpeniAppTracker
