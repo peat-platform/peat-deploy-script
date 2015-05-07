@@ -8,7 +8,7 @@ This script deploys the OPENi Cloudlet Platform on an Ubuntu 14.04 server
 
 Clone the openi_dev_env project on the git repo.
 
-    git clone https://github.com/OPENi-ict/openi-deploy-script.git
+    git clone https://github.com/peat-platform/openi-deploy-script.git
 
 
 Once you are happy with your parameters you execute the following commands to bootstrap and provision the server. This can take up to an hour to execute.
