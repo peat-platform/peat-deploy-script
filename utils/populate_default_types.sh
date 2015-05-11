@@ -7,7 +7,7 @@ curl --insecure -X POST \
   "@context": [
     {
       "@property_name": "images",
-      "@type": "attachment",
+      "@data_type": "attachment",
       "@required": false,
       "@multiple": true,
       "@context": "https://peat-platform.org/images/ids"
@@ -25,7 +25,7 @@ curl --insecure -X POST \
   "@context": [
     {
       "@property_name": "videos",
-      "@type": "attachment",
+      "@data_type": "attachment",
       "@required": false,
       "@multiple": true,
       "@context": "https://peat-platform.org/videos/ids"
@@ -43,7 +43,7 @@ curl --insecure -X POST \
   "@context": [
     {
       "@property_name": "pdfs",
-      "@type": "attachment",
+      "@data_type": "attachment",
       "@required": false,
       "@multiple": true,
       "@context_id": "https://peat-platform.org/pdfs/ids"
@@ -62,7 +62,7 @@ curl --insecure -X POST \
   "@context": [
     {
       "@property_name": "audio",
-      "@type": "attachment",
+      "@data_type": "attachment",
       "@required": false,
       "@multiple": true,
       "@context_id": "https://peat-platform.org/audio/ids"
