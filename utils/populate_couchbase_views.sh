@@ -82,26 +82,13 @@ curl -X PUT \
    }' \
   http://admin:password@localhost:8092/clients/_design/clients_views
 
-  curl -X PUT \
-  -H "Accept:application/json" \
-  -H "Content-Type: application/json" \
-  -d '{
-      "views": {
-         "app_permissions": {
-            "map": "function (doc, meta) {\n  splitId = meta.id.split(\"_\")\n  if (Date.parse(splitId[splitId.length-1]) > 0) {\n    title = splitId[0]+\"_\"+splitId[1]\n    emit(title,doc[\"_current\"])\n  }\n}"
-         }
-      }
-   }' \
-  http://admin:password@localhost:8092/app_permissions/_design/permission_views
-
-
     curl  -X PUT \
     -H "Accept:application/json" \
     -H "Content-Type: application/json" \
     -d '{
         "views": {
            "app_permissions": {
-              "map": "function (doc, meta) {\n splitId = meta.id.split(\"_\")\n emit([splitId[0], splitId[1]], meta.id)\n}",
+              "map": "function (doc, meta) {\n splitId = meta.id.split(\"_\")\n emit([splitId[0], splitId[1]], doc)\n}",
               "reduce":"_count"
            }
         }
