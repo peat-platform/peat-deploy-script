@@ -64,9 +64,8 @@ sudo ufw allow out to any port 53
 sudo ufw allow out to any port 80
 sudo ufw allow out to any port 443
 sudo ufw allow out to any port 9418
-sudo ufw enable
 
-echo y | ufw enable
+#echo y | ufw enable
 
 apt-get install -y fail2ban
 

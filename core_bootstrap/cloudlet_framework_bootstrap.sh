@@ -2,25 +2,6 @@
 
 cd $SCRIPT_ROOT_DIR
 
-# Install requirements for Android sdk generation
-sudo apt-get install -y openjdk-7-jdk
-sudo apt-get install -y maven=3.0.4-2
-sudo apt-get install -y libjansi-java
-
-sudo apt-get remove scala-library scala
-wget --quiet www.scala-lang.org/files/archive/scala-2.10.3.deb
-sudo dpkg -i scala-2.10.3.deb
-sudo apt-get update
-sudo apt-get install -y scala
-rm scala-2.10.3.deb
-
-wget --quiet http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt//0.12.3/sbt.deb
-sudo dpkg -i sbt.deb
-sudo apt-get update
-sudo apt-get install -y sbt
-rm sbt.deb
-
-
 # Install ZMQ
 cd /tmp ; wget --quiet http://download.zeromq.org/zeromq-3.2.4.tar.gz ; tar -xzvf zeromq-3.2.4.tar.gz
 cd /tmp/zeromq-3.2.4/ ; ./configure ; make ; make install
@@ -36,9 +17,6 @@ apt-get install -y libsqlite3-dev
 # Install Mongrel2
 cd /tmp ;
 git clone https://github.com/peat-platform/mongrel2-server
-#git clone https://www.github.com/aidenkeating/mongrel2.git
-#wget --quiet --no-check-certificate https://github.com/zedshaw/mongrel2/releases/download/v1.9.1/mongrel2-v1.9.1.tar.gz ;
-#tar -xzvf mongrel2-v1.9.1.tar.gz
 cd /tmp/mongrel2-server/ ;
 make clean all
 sudo make install
