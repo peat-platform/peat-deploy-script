@@ -4,7 +4,7 @@ cd $SCRIPT_ROOT_DIR
 
 #echo "ubuntu:$PASS" | chpasswd
 
-sudo sed -i -e 's/ubuntu ALL=(ALL) NOPASSWD:ALL/ubuntu ALL=(ALL:ALL) ALL/g' /etc/sudoers.d/90-cloud-init-users
+#sudo sed -i -e 's/ubuntu ALL=(ALL) NOPASSWD:ALL/ubuntu ALL=(ALL:ALL) ALL/g' /etc/sudoers.d/90-cloud-init-users
 
 
 apt-get update -q -y
