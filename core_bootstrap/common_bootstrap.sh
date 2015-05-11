@@ -2,7 +2,7 @@
 
 cd $SCRIPT_ROOT_DIR
 
-echo "ubuntu:$PASS" | chpasswd
+#echo "ubuntu:$PASS" | chpasswd
 
 sudo sed -i -e 's/ubuntu ALL=(ALL) NOPASSWD:ALL/ubuntu ALL=(ALL:ALL) ALL/g' /etc/sudoers.d/90-cloud-init-users
 
@@ -59,7 +59,7 @@ sudo ufw allow 80/tcp
 sudo ufw allow 443/tcp
 sudo ufw allow 3306/tcp
 sudo ufw allow 8888/tcp
-ufw allow out to any port 25
+sudo ufw allow out to any port 25
 sudo ufw allow out to any port 53
 sudo ufw allow out to any port 80
 sudo ufw allow out to any port 443
@@ -67,11 +67,11 @@ sudo ufw allow out to any port 9418
 
 #echo y | ufw enable
 
-apt-get install -y fail2ban
+sudo apt-get install -y fail2ban
 
 sudo apt-get install -y logwatch
 
- sudo sed -i -e 's/\/usr\/sbin\/logwatch --output mail/\/usr\/sbin\/logwatch --output mail --mailto $LOGWATCH_EMAIL --detail high/g' /etc/cron.daily/00logwatch
+sudo sed -i -e 's/\/usr\/sbin\/logwatch --output mail/\/usr\/sbin\/logwatch --output mail --mailto $LOGWATCH_EMAIL --detail high/g' /etc/cron.daily/00logwatch
 
 /usr/sbin/logwatch --output mail --mailto $LOGWATCH_EMAIL --detail high
 
