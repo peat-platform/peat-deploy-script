@@ -1,12 +1,12 @@
 # Cloudlet Platform Deployment Script
 
 ## Introduction
-This script deploys the OPENi Cloudlet Platform on an Ubuntu 14.04 server
+This script deploys the PEAT Platform on an Ubuntu 14.04 server
 
 
 ## Setup
 
-Clone the openi_dev_env project on the git repo.
+Clone the peat-deploy-script project on the git repo.
 
     git clone https://github.com/peat-platform/peat-deploy-script.git
 
@@ -22,7 +22,7 @@ Once you are happy with your parameters you execute the following commands to bo
 
     bash provision.sh
 
-    sh utils/tmux_openi.sh
+    sh utils/tmux_peat.sh
 
     sh utils/populate_default_types.sh
 

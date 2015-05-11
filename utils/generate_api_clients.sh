@@ -1,5 +1,5 @@
 #!/bin/bash
-cd ~/repos/openi_android_sdk
+cd ~/repos/peat-android-sdk
 
 bash build-android-sdk.sh $1
 
