@@ -46,7 +46,7 @@ curl --insecure -X POST \
       "@data_type": "attachment",
       "@required": false,
       "@multiple": true,
-      "@context_id": "https://peat-platform.org/pdfs/ids"
+      "@context": "https://peat-platform.org/pdfs/ids"
     }
   ],
   "@reference": "https://peat-platform.org/pdfs"
@@ -65,7 +65,7 @@ curl --insecure -X POST \
       "@data_type": "attachment",
       "@required": false,
       "@multiple": true,
-      "@context_id": "https://peat-platform.org/audio/ids"
+      "@context": "https://peat-platform.org/audio/ids"
     }
   ],
   "@reference": "https://peat-platform.org/audio"
