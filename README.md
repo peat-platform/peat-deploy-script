@@ -29,6 +29,8 @@ Once you are happy with your parameters you execute the following commands to bo
     sh utils/populate_couchbase_views.sh
 
     sh utils/generate_api_clients.sh server_dns
+    
+    sh utils/populate_graph_api_types.sh
 
 Navigate to `https://<your ip address>`.
 
