@@ -98,13 +98,15 @@ sudo chown -R $USER:$GROUP /tmp
 # Install Piwik
 # TODO: Sort out proper passwords
 sudo apt-get update
+# sudo mkdir /usr/share/piwik
 sudo apt-get -y install unzip php5 php5-mysql php5-gd
 cd /usr/share
 sudo wget http://builds.piwik.org/latest.zip
-sudo unzip latest.zip
+y | sudo unzip latest.zip
 sudo chmod a+w /usr/share/piwik/tmp
 sudo chmod a+w /usr/share/piwik/config
 sudo chown -R $USER:$GROUP /usr/share/piwik
+
 
 cd /usr/share/piwik/plugins
 sudo git clone https://github.com/peat-platform/openi-app-tracker.git OpeniAppTracker
@@ -113,20 +115,28 @@ sudo git clone https://github.com/peat-platform/openi-location-tracker.git Openi
 sudo git clone https://github.com/peat-platform/openi-object-tracker.git OpeniObjectTracker
 sudo chown -R $USER:$GROUP /tmp
 
+sudo sh -c 'echo "Alias /piwik /usr/share/piwik \n<Directory /usr/share/piwik>\n  Order allow,deny\n  Allow from all\n  AllowOverride None\n  Options Indexes FollowSymLinks\n</Directory>" >> /etc/apache2/apache2.conf'
 sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password password password'
 sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again password password'
 sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y install mysql-server-5.5
 if [ ! -f /var/log/databasesetup ];
 then
-    echo "CREATE USER 'piwik'@'localhost' IDENTIFIED BY 'password'" | mysql -uroot -ppassword
+	echo "CREATE USER 'piwik'@'localhost' IDENTIFIED BY 'password'" | mysql -uroot -ppassword
     echo "CREATE DATABASE piwik" | mysql -uroot -ppassword
     echo "GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON piwik.* TO 'piwik'@'localhost'" | mysql -uroot -ppassword
     echo "flush privileges" | mysql -uroot -ppassword
 
     touch /var/log/databasesetup
 
+    if [ -f /vagrant/data/initial.sql ];
+    then
+        mysql -uroot -ppassword piwik < /vagrant/data/initial.sql
+    fi
 fi
 
+# mysql -u root -ppassword -e "CREATE DATABASE piwik"
+# mysql -u root -ppassword -e "CREATE USER 'piwik'@'localhost' IDENTIFIED BY 'password'"
+# mysql -u root -ppassword -e "GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON piwik.* TO 'piwik'@'localhost'"
 sudo /etc/init.d/apache2 restart
 sudo chown -R $USER:$GROUP /tmp
