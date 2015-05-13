@@ -15,7 +15,7 @@ Once you are happy with your parameters you execute the following commands to bo
 
     cd peat-deploy-script
 
-    sudo sh bootstrap.sh
+    sudo bash bootstrap.sh
 
 
 ## Post Bootstrap

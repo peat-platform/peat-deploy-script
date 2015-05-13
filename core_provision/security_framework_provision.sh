@@ -6,7 +6,7 @@ git clone https://github.com/peat-platform/auth-dialogs.git
 
 cd ~/repos/auth-dialogs; npm install --no-bin-links
 
-cd /vagrant/core_provision/
+cd core_provision/
 npm install couchbase
-node /vagrant/core_provision/security_framework_init.js
+node core_provision/security_framework_init.js
 rm -r node_modules
