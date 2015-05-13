@@ -2,8 +2,8 @@
 
 cd core_provision/
 npm install couchbase
-node core_provision/security_framework_init.js
-rm -r node_modules
+node security_framework_init.js
+rm -fr node_modules
 
 cd ~/repos
 
