@@ -79,7 +79,7 @@ curl -X PUT \
   -d '{
     "views": {
         "clients_by_cloudlet_id": {
-            "map": "function (doc, meta) {\n  emit(doc.cloudlet, doc); \n}",
+            "map": "function (doc, meta) {\n  if (undefined === doc.isSE || false === doc.isSE ){ emit(doc.cloudlet, doc);\n} \n}",
             "reduce": "_count"
         },
         "list_service_enablers": {
@@ -87,7 +87,7 @@ curl -X PUT \
             "reduce": "_count"
         }
     }
-   }' \
+}' \
   http://admin:password@localhost:8092/clients/_design/clients_views
 
     curl  -X PUT \
