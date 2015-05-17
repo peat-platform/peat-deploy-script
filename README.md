@@ -21,6 +21,8 @@ Once you are happy with your parameters you execute the following commands to bo
 ## Post Bootstrap
 
     bash provision.sh
+    
+    sh utils/change_auth_token_keys.sh 
 
     sh utils/tmux_peat.sh
 
