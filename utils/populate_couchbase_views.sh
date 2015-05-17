@@ -7,22 +7,22 @@ curl  -X PUT \
   -d '{
       "views": {
          "object_by_cloudlet_id": {
-            "map": "function (doc, meta) {\n\n  if (undefined === doc[\"@type\"]){    return   }\n\n  var ts = new Date(doc[\"_date_modified\"]).getTime()\n\n  emit( [doc[\"@cloudlet\"], doc[\"@cloudlet\"], ts], doc[\"@id\"] );\n\n  for ( i in doc._permissions){\n\n    if ( doc._permissions[i][\"read\"] ){\n emit( [i, doc[\"@cloudlet\"], ts], doc[\"@id\"] );\n    }\n  }\n}",
+            "map": "function (doc, meta) {\n\n  if (undefined === doc[\"@openi_type\"]){    return   }\n\n  var ts = new Date(doc[\"_date_modified\"]).getTime()\n\n  emit( [doc[\"@cloudlet\"], doc[\"@cloudlet\"], ts], doc[\"@id\"] );\n\n  for ( i in doc._permissions){\n\n    if ( doc._permissions[i][\"read\"] ){\n emit( [i, doc[\"@cloudlet\"], ts], doc[\"@id\"] );\n    }\n  }\n}",
             "reduce":"_count"
          },
          "object_by_type" : {
-            "map" : "function (doc, meta) {\n if (undefined === doc[\"@type\"]){\n return \n }\n var ts = new Date(doc[\"_date_modified\"]).getTime() \n emit( [doc[\"@cloudlet\"], doc[\"@type\"], ts, doc[\"@cloudlet\"]], [doc[\"@cloudlet\"], doc[\"@id\"]] ); \n for ( i in doc._permissions){ \n if ( doc._permissions[i][\"read\"] ){ \n emit( [i, doc[\"@type\"], ts, doc[\"@cloudlet\"]], [doc[\"@cloudlet\"], doc[\"@id\"]] );\n }\n}\n}",
+            "map" : "function (doc, meta) {\n if (undefined === doc[\"@openi_type\"]){\n return \n }\n var ts = new Date(doc[\"_date_modified\"]).getTime() \n emit( [doc[\"@cloudlet\"], doc[\"@openi_type\"], ts, doc[\"@cloudlet\"]], [doc[\"@cloudlet\"], doc[\"@id\"]] ); \n for ( i in doc._permissions){ \n if ( doc._permissions[i][\"read\"] ){ \n emit( [i, doc[\"@openi_type\"], ts, doc[\"@cloudlet\"]], [doc[\"@cloudlet\"], doc[\"@id\"]] );\n }\n}\n}",
             "reduce" : "_count"
          },
          "type_usage" : {
-            "map" : "function (doc, meta) {\n if (undefined === doc[\"@type\"]){\n    return \n  }\n emit(doc[\"@type\"], 1);\n}",
+            "map" : "function (doc, meta) {\n if (undefined === doc[\"@openi_type\"]){\n    return \n  }\n emit(doc[\"@openi_type\"], 1);\n}",
             "reduce" : "_count"
          },
          "object_data" : {
-            "map" : "function (doc, meta) {\n if (undefined === doc[\"@type\"]){\n    return \n  }\n emit(doc[\"@id\"], doc[\"@type\"]);\n}"
+            "map" : "function (doc, meta) {\n if (undefined === doc[\"@openi_type\"]){\n    return \n  }\n emit(doc[\"@id\"], doc[\"@openi_type\"]);\n}"
          },
          "object_by_third_party_type" : {
-            "map" : "function (doc, meta) {if (undefined === doc[\"@type\"]){ return }\n \n emit( [doc[\"@cloudlet\"], doc[\"@cloudlet\"], doc[\"@type\"]], doc[\"@type\"] );\n \n for ( i in doc._permissions){\n \n if ( doc._permissions[i][\"read\"] ){\n emit( [i, doc[\"@cloudlet\"], doc[\"@type\"]], doc[\"@type\"] );\n }\n }\n }",
+            "map" : "function (doc, meta) {if (undefined === doc[\"@openi_type\"]){ return }\n \n emit( [doc[\"@cloudlet\"], doc[\"@cloudlet\"], doc[\"@openi_type\"]], doc[\"@openi_type\"] );\n \n for ( i in doc._permissions){\n \n if ( doc._permissions[i][\"read\"] ){\n emit( [i, doc[\"@cloudlet\"], doc[\"@openi_type\"]], doc[\"@openi_type\"] );\n }\n }\n }",
             "reduce" : "_count"
          }
       }
@@ -60,17 +60,20 @@ curl  -X PUT \
   http://admin:password@localhost:8092/types/_design/type_views
 
 
-  curl  -X PUT \
-  -H "Accept:application/json" \
-  -H "Content-Type: application/json" \
-  -d '{
-      "views": {
-         "subs_by_objectId": {
-            "map": "function (doc, meta) {\n  if (meta.id.indexOf(\"+s_\") !== -1) {\n    //var cloudlet = meta.id.split(\"+\")[0]\n    emit(doc.objectid, doc);\n  }\n}"
+  curl -X PUT \
+    -H "Accept:application/json" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "views": {
+           "subs": {
+              "map": "function (doc, meta) {\n  if (meta.id.indexOf(\"+s_\") !== -1) {\n    var cloudlet = meta.id.split(\"+\")[0]\n    if(doc.objectid !== undefined || doc.objectid !== null) {\n      emit([cloudlet, doc.objectid],doc)\n    }\n    else {\n      emit([cloudlet, null], doc);\n    }\n  }\n}"
+          },
+          "subscribers": {
+              "map": "function (doc, meta) {\n  if (meta.id.indexOf(\"+s_\") !== -1) {\n    var cloudlet = doc.cloudletid;\n    if(doc.objectid !== undefined || doc.objectid !== null) {\n      emit([cloudlet, doc.objectid],doc)\n    }\n    else {\n      emit([cloudlet, null], doc);\n    }\n  }\n}"
+          }
         }
-      }
-    }' \
-  http://admin:password@localhost:8092/objects/_design/subscription_views
+      }' \
+    http://admin:password@localhost:8092/objects/_design/subscription_views
 
 
 curl -X PUT \

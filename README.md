@@ -26,7 +26,6 @@ public/private keys with production ready (2048 bit) keys.
     sh utils/change_auth_token_keys.sh 
     
 Next start the PEAT processes through tmux. Once it is up and running exit by entering ctrl + d.
-
     sh utils/tmux_peat.sh
 Next we need to populate the datastore with a number of default objects.
 
@@ -41,7 +40,6 @@ downloaded from the installations homepage.
 
     sh utils/generate_api_clients.sh server_dns
     
-Your installation should be ready. Navigate to `https://<your ip address>`.
 
 
 ## Additional Steps
@@ -64,7 +62,7 @@ A document in the db_keys bucket of couchbase must be created manually as couchb
 }
 ~~~
 
-* Disable port 8091 using ufw.
+Your installation should be ready. Navigate to `https://<your ip address>`.
 
 ### Troubleshooting
 
