@@ -1,8 +1,9 @@
 #!/bin/bash
 
-openssl genrsa -out new_private_key.pem 2048
-
-openssl rsa -in new_private_key.pem -pubout -out new_public_key.pem
+if [ ! -f new_private_key.pem ]; then
+   openssl genrsa -out new_private_key.pem 2048
+   openssl rsa -in new_private_key.pem -pubout -out new_public_key.pem
+fi 
 
 new_private_key=`cat new_private_key.pem`
 new_public_key=`cat new_public_key.pem`
