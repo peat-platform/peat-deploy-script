@@ -82,11 +82,11 @@ curl -X PUT \
   -d '{
     "views": {
         "clients_by_cloudlet_id": {
-            "map": "function (doc, meta) {\n  if (undefined === doc.isSE || false === doc.isSE ){ emit(doc.cloudlet, doc);\n} \n}",
+            "map": "function (doc, meta) {\n  if (undefined === doc.isSE && false === doc.isSE ){ emit(doc.cloudlet, doc);\n} \n}",
             "reduce": "_count"
         },
         "list_service_enablers": {
-            "map": "function (doc, meta) {\n if (undefined !== doc.isSE || true === doc.isSE ){\n emit(meta.id, doc);\n }\n}",
+            "map": "function (doc, meta) {\n if (undefined !== doc.isSE && true === doc.isSE ){\n emit(meta.id, doc);\n }\n}",
             "reduce": "_count"
         }
     }
