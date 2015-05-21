@@ -107,14 +107,13 @@ curl -X PUT \
     http://admin:password@localhost:8092/app_permissions/_design/permission_views
 
 
-
     curl  -X PUT \
     -H "Accept:application/json" \
     -H "Content-Type: application/json" \
     -d '{
         "views": {
            "list_permissions_for_cloudlet": {
-              "map": "function (doc, meta) {\n var userCid = meta.id.split(\"+\")[1]\n var appCid = meta.id.split(\"+\")[0]\n emit([userCid, appCid], {\"third_party\" : appCid, \"perms\" : doc})\n}",
+              "map": "function (doc, meta) {\n   var split = meta.id.split(\"+\")\n   var appCid  = split[0]\n   var userCid = split[1]\n   var appId   = split[2]\n     emit([userCid, appCid, appId], {\"third_party\" : appCid, \"app_key\" :appId, \"perms\" : doc[\"_current\"][\"perms\"]})\n}",
               "reduce":"_count"
            }
         }
