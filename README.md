@@ -29,8 +29,6 @@ Next start the PEAT processes through tmux. Once it is up and running exit by en
     sh utils/tmux_peat.sh
 Next we need to populate the datastore with a number of default objects.
 
-    sh utils/populate_default_types.sh
-
     sh utils/populate_couchbase_views.sh
     
     sh utils/populate_graph_api_types.sh
