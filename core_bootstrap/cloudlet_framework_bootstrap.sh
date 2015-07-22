@@ -89,9 +89,9 @@ curl -v -X POST -u admin:password http://localhost:8091/controller/createReplica
 
 
 # usermod -a -G vagrant vagrant
-sudo mkdir -p /opt/openi/cloudlet_platform/logs/
-sudo mkdir -p /opt/openi/cloudlet_platform/uploads/
-sudo chown -R $USER:$GROUP /opt/openi/cloudlet_platform/
+sudo mkdir -p /opt/peat/cloudlet_platform/logs/
+sudo mkdir -p /opt/peat/cloudlet_platform/uploads/
+sudo chown -R $USER:$GROUP /opt/peat/cloudlet_platform/
 
 sudo chown -R $USER:$GROUP /tmp
 
