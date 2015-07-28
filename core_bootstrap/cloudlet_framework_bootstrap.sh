@@ -2,11 +2,27 @@
 
 cd $SCRIPT_ROOT_DIR
 
+sudo apt-get install -y openjdk-7-jdk
+sudo apt-get install -y maven=3.0.4-2
+sudo apt-get install -y libjansi-java
+
+sudo apt-get remove scala-library scala
+wget --quiet www.scala-lang.org/files/archive/scala-2.10.3.deb
+sudo dpkg -i scala-2.10.3.deb
+sudo apt-get update
+sudo apt-get install -y scala
+rm scala-2.10.3.deb
+
+wget --quiet http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt//0.12.3/sbt.deb
+sudo dpkg -i sbt.deb
+sudo apt-get update
+sudo apt-get install -y sbt
+rm sbt.deb
+
 # Install ZMQ
 cd /tmp ; wget --quiet http://download.zeromq.org/zeromq-3.2.4.tar.gz ; tar -xzvf zeromq-3.2.4.tar.gz
 cd /tmp/zeromq-3.2.4/ ; ./configure ; make ; make install
 ldconfig
-
 sudo chown -R $USER:$GROUP /tmp
 cd ~
 
@@ -16,38 +32,34 @@ apt-get install -y libsqlite3-dev
 
 # Install Mongrel2
 cd /tmp ;
-git clone https://github.com/peat-platform/mongrel2-server
-cd /tmp/mongrel2-server/ ;
+git clone https://github.com/zedshaw/mongrel2.git
+cd /tmp/mongrel2
+git checkout release/1.9.2
+
 make clean all
 sudo make install
-
 sudo chown -R $USER:$GROUP /tmp
 
 # Install Couchbase
 cd /tmp ;
-wget --quiet http://packages.couchbase.com/releases/3.0.0/couchbase-server-enterprise_3.0.0-ubuntu12.04_amd64.deb
-sudo dpkg -i couchbase-server-enterprise_3.0.0-ubuntu12.04_amd64.deb
-rm /tmp/couchbase-server-enterprise_3.0.0-ubuntu12.04_amd64.deb
-
+#wget http://latestbuilds.hq.couchbase.com/couchbase-server/sherlock/3133/couchbase-server-enterprise_4.0.0-3133-ubuntu14.04_amd64.deb
+wget http://packages.couchbase.com/releases/4.0.0-beta/couchbase-server-enterprise_4.0.0-beta-ubuntu14.04_amd64.deb
+sudo dpkg -i couchbase-server-enterprise_4.0.0-beta-ubuntu14.04_amd64.deb
+rm /tmp/couchbase-server-enterprise_4.0.0-beta-ubuntu14.04_amd64.deb
 sudo chown -R $USER:$GROUP /tmp
 
 /bin/sleep 10
-sudo /opt/couchbase/bin/couchbase-cli cluster-init --cluster=127.0.0.1:8091 --user=admin --password=password --cluster-ramsize=2372
+sudo /opt/couchbase/bin/couchbase-cli cluster-init --cluster=127.0.0.1:8091 --user=admin --password=password --cluster-ramsize=2372 --services="data;index;query"
 sudo /opt/couchbase/bin/couchbase-cli bucket-create -c 127.0.0.1:8091 --bucket=objects     --bucket-type=couchbase --bucket-ramsize=100 --bucket-replica=0 -u admin -p password
 sudo /opt/couchbase/bin/couchbase-cli bucket-create -c 127.0.0.1:8091 --bucket=types       --bucket-type=couchbase --bucket-ramsize=100 --bucket-replica=0 -u admin -p password
 sudo /opt/couchbase/bin/couchbase-cli bucket-create -c 127.0.0.1:8091 --bucket=attachments --bucket-type=couchbase --bucket-ramsize=100 --bucket-replica=0 -u admin -p password
 sudo /opt/couchbase/bin/couchbase-cli bucket-create -c 127.0.0.1:8091 --bucket=permissions --bucket-type=couchbase --bucket-ramsize=100 --bucket-replica=0 -u admin -p password
 sudo /opt/couchbase/bin/couchbase-cli bucket-create -c 127.0.0.1:8091 --bucket=app_permissions --bucket-type=couchbase --bucket-ramsize=100 --bucket-replica=0 -u admin -p password
 
-# Install N1QL DP4
-#cd /tmp;
-#wget --quiet http://packages.couchbase.com/releases/couchbase-query/dp4/couchbase-query_dev_preview4_x86_64_linux.tar.gz
-#tar -xf couchbase-query_dev_preview4_x86_64_linux.tar.gz
-#sudo mv cbq-dp4 /opt/n1ql
+/bin/sleep 5
+curl -v http://localhost:8093/query/service -d 'statement=CREATE PRIMARY INDEX `objects-index` ON `objects`;'
+curl -v http://localhost:8093/query/service -d 'statement=CREATE PRIMARY INDEX `types-index` ON `types`;'
 
-
-curl -v http://localhost:8093/query/service -d 'statement=CREATE PRIMARY INDEX ON objects;'
-curl -v http://localhost:8093/query/service -d 'statement=CREATE PRIMARY INDEX ON types;'
 
 
 sudo chown -R $USER:$GROUP /tmp
