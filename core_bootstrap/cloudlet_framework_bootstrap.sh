@@ -32,7 +32,7 @@ apt-get install -y libsqlite3-dev
 
 # Install Mongrel2
 cd /tmp ;
-git clone https://github.com/zedshaw/mongrel2.git
+git clone https://github.com/mongrel2/mongrel2.git
 cd /tmp/mongrel2
 git checkout release/1.9.2
 
