@@ -8,7 +8,7 @@ fi
 new_private_key=`cat new_private_key.pem`
 new_public_key=`cat new_public_key.pem`
 
-node update_files_with_keys.js "$new_private_key" "$new_public_key" ~/repos/cloudlet-platform/lib/main.js
+node update_files_with_keys.js "$new_private_key" "$new_public_key" ~/repos/cloudlet-platform/lib/config.js
 node update_files_with_keys.js "$new_private_key" "$new_public_key" ~/repos/user-dashboard/libs/config.js
 node update_files_with_keys.js "$new_private_key" "$new_public_key" ~/repos/user-dashboard/app.js
 node update_files_with_keys.js "$new_private_key" "$new_public_key" ~/repos/admin-dashboard/libs/config.js

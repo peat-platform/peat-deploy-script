@@ -2,9 +2,9 @@
 
 cd $SCRIPT_ROOT_DIR
 
-#echo "ubuntu:$PASS" | chpasswd
+echo "ubuntu:$PASS" | chpasswd
 
-#sudo sed -i -e 's/ubuntu ALL=(ALL) NOPASSWD:ALL/ubuntu ALL=(ALL:ALL) ALL/g' /etc/sudoers.d/90-cloud-init-users
+sudo sed -i -e 's/ubuntu ALL=(ALL) NOPASSWD:ALL/ubuntu ALL=(ALL:ALL) ALL/g' /etc/sudoers.d/90-cloud-init-users
 
 
 apt-get update -q -y
@@ -67,7 +67,7 @@ sudo ufw allow out to any port 80
 sudo ufw allow out to any port 443
 sudo ufw allow out to any port 9418
 
-#echo y | ufw enable
+echo y | ufw enable
 
 sudo apt-get install -y fail2ban
 

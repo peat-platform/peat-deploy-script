@@ -132,3 +132,9 @@ curl -X PUT \
         }
      }' \
     http://admin:password@localhost:8092/users/_design/user_views
+
+
+curl -v http://localhost:8093/query/service -d 'statement=CREATE PRIMARY INDEX `objects-index` ON `objects`;'
+curl -v http://localhost:8093/query/service -d 'statement=CREATE PRIMARY INDEX `types-index` ON `types`;'
+curl -v http://localhost:8093/query/service -d 'statement=CREATE PRIMARY INDEX `clients-index` ON `clients`;'
+curl -v http://localhost:8093/query/service -d 'statement=CREATE PRIMARY INDEX `users-index` ON `users`;'
