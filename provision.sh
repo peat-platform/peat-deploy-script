@@ -10,5 +10,3 @@ cd $SCRIPT_ROOT_DIR
 . core_provision/security_framework_provision.sh
 cd $SCRIPT_ROOT_DIR
 . core_provision/sdk_framework_provision.sh
-cd $SCRIPT_ROOT_DIR
-. core_provision/monitoring_provision.sh
