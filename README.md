@@ -14,7 +14,7 @@ Clone the peat-deploy-script project on the git repo.
 Once you are happy with your parameters you execute the following commands to bootstrap and provision the server. This can take up to an hour to execute.
 
     cd peat-deploy-script
-
+    
     sudo bash bootstrap.sh
 
 
@@ -23,7 +23,13 @@ public/private keys with production ready (2048 bit) keys.
 
     bash provision.sh
     
-    sh utils/change_auth_token_keys.sh 
+    cd utils/
+    
+    sh change_auth_token_keys.sh 
+    
+    cd ../
+    
+    sh utils/tmux_peat.sh
     
 Next start the PEAT processes through tmux. Once it is up and running exit by entering ctrl + d.
     sh utils/tmux_peat.sh

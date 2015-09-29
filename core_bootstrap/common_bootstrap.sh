@@ -21,23 +21,11 @@ apt-get install -y vim
 apt-get install -y libssl0.9.8
 apt-get install -y g++ uuid-dev binutils libtool autoconf automake maven
 
-su vagrant -l -c "curl --silent --location https://deb.nodesource.com/setup_0.12 | sudo bash -"
-su vagrant -l -c "sudo apt-get install --yes nodejs"
-su vagrant -l -c "alias node="nodejs""
+su ubuntu -l -c "curl --silent --location https://deb.nodesource.com/setup_4.x | sudo bash -"
+su ubuntu -l -c "sudo apt-get install --yes nodejs"
+su ubuntu -l -c "alias node="nodejs""
 
 #cp -Rf core_bootstrap/static/* /
-
-cat > /etc/hosts <<DELIM
-127.0.0.1 localhost
-127.0.1.1 trusty64 peat.platform.org
-
-# The following lines are desirable for IPv6 capable hosts
-::1     ip6-localhost ip6-loopback
-fe00::0 ip6-localnet
-ff00::0 ip6-mcastprefix
-ff02::1 ip6-allnodes
-ff02::2 ip6-allrouters
-DELIM
 
 cat > /home/$USER/.ssh/config <<DELIM
 Host github.com

@@ -23,11 +23,11 @@ rm sbt.deb
 # Install ZMQ + libsodium
 sudo apt-get install uuid-dev
 cd /tmp ; wget --quiet https://download.libsodium.org/libsodium/releases/libsodium-1.0.3.tar.gz ; tar -xzvf libsodium-1.0.3.tar.gz
-cd /tmp/libsodium-1.0.3/ ; ./configure ; make ; make install
+cd /tmp/libsodium-1.0.3/ ; ./configure ; make ; sudo make install
 #cd /tmp ; wget --quiet http://download.zeromq.org/zeromq-3.2.4.tar.gz ; tar -xzvf zeromq-3.2.4.tar.gz
 cd /tmp ; wget --quiet http://download.zeromq.org/zeromq-4.1.3.tar.gz ; tar -xzvf zeromq-4.1.3.tar.gz
 #cd /tmp/zeromq-3.2.4/ ; ./configure ; make ; make install
-cd /tmp/zeromq-4.1.3/ ; ./configure --without-libsodium ; make ; make install
+cd /tmp/zeromq-4.1.3/ ; ./configure --without-libsodium ; make ; sudo make install
 ldconfig
 sudo chown -R $USER:$GROUP /tmp
 cd ~
@@ -49,9 +49,12 @@ sudo chown -R $USER:$GROUP /tmp
 # Install Couchbase
 cd /tmp ;
 #wget http://latestbuilds.hq.couchbase.com/couchbase-server/sherlock/3133/couchbase-server-enterprise_4.0.0-3133-ubuntu14.04_amd64.deb
-wget http://packages.couchbase.com/releases/4.0.0-beta/couchbase-server-enterprise_4.0.0-beta-ubuntu14.04_amd64.deb
-sudo dpkg -i couchbase-server-enterprise_4.0.0-beta-ubuntu14.04_amd64.deb
-rm /tmp/couchbase-server-enterprise_4.0.0-beta-ubuntu14.04_amd64.deb
+
+wget http://packages.couchbase.com/releases/4.0.0-rc0/couchbase-server-community_4.0.0-rc0-ubuntu14.04_amd64.deb
+
+sudo dpkg -i couchbase-server-community_4.0.0-rc0-ubuntu14.04_amd64.deb
+rm /tmp/couchbase-server-community_4.0.0-rc0-ubuntu14.04_amd64.deb
+
 sudo chown -R $USER:$GROUP /tmp
 
 /bin/sleep 10

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd core_provision/
+cd utils/
 npm install couchbase
 node security_framework_init.js
 rm -fr node_modules

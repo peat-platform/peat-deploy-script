@@ -73,4 +73,3 @@ DELIM
 
 sudo sh /etc/init.d/apache2 restart
 sudo sh /etc/init.d/networking restart
-sudo ifdown --exclude=lo -a && sudo ifup --exclude=lo -a
